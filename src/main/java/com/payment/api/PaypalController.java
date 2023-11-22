@@ -1,12 +1,10 @@
 package com.payment.api;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
@@ -34,7 +32,7 @@ public class PaypalController {
                     "http://localhost:9090/" + SUCCESS_URL);
             for(Links link:payment.getLinks()) {
                 if(link.getRel().equals("approval_url")) {
-                    return "redirect to:"+link.getHref();
+                    return "redirect:"+link.getHref();
                 }
             }
 
@@ -42,7 +40,7 @@ public class PaypalController {
 
             e.printStackTrace();
         }
-        return "redirect to:/";
+        return "redirect:/";
     }
 
     @GetMapping(value = CANCEL_URL)
